@@ -8,16 +8,18 @@ package Item;
 
 public class Item {
   
-private double ID;
-private String name;
-private int yearOfPublication;
+protected String id;
+protected String name;
+protected String author;
+protected int yearOfPublication;
 
 
 //default constructor
 public Item(){
 
-    this.ID=0;
+    //this.ID=0;
     this.name="";
+    this.author = "";
     this.yearOfPublication=0;
 
 
@@ -26,10 +28,11 @@ public Item(){
 
 //parameterized constructor
 
-public Item(double ID, String name, int yearOfPublication){
+public Item(String name, String author, int yearOfPublication){
 
    
     this.name=name;
+    this.author = author;
     this.yearOfPublication=yearOfPublication;
 
 
@@ -48,9 +51,9 @@ public Item(Item otherItem){
 
 //getter
 
-public double getID(){
+public String getID(){
 
-    return ID;
+    return id;
 
 }
 
@@ -76,7 +79,7 @@ public int getYearOfPublication(){
 public String toString(){
 
 
-    return" ID "+ID+" Name "+name+" Year of  Publication "+ yearOfPublication;
+    return" ID "+ id+" Name "+name+" Year of  Publication "+ yearOfPublication;
 
 }
 

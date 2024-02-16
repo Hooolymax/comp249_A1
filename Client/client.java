@@ -1,18 +1,21 @@
 package Client;
 
 //--------------------------------------------------------------------  
-//Assignment 1
-//Question 
-//Written by Ignatina Alisa 40267100 and Jinghao Lai 40041316 
+// Assignment 1
+// Question 
+// Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
 //--------------------------------------------------------------------
 
+
+/** This class stores information about clients
+ */
 public class Client {
 
     // variable declaration
-    protected int id = 0;
-    protected String name;
-    protected String phone;
-    protected String email;
+    private int id = 0;
+    private String name;
+    private String phone;
+    private String email;
     
     // default constructor
     public Client() {
@@ -30,14 +33,51 @@ public class Client {
         this.id ++;
     }
 
-    // copy constructor
-    public Client(Client aClient){
-        this.name = aClient.name;
-        this.phone = aClient.phone;
-        this.email = aClient.email;
-        this.id ++;
+    // getters 
+    public String getName() {
+        return name;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    // setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String toString() {
+        return name + " has an ID " + id + ", phone " + phone + ", email " + email;
+    }
+
+    public boolean equals(Client aClient) {
+        if (this.id == aClient.id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 }
