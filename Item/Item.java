@@ -1,10 +1,10 @@
 package Item;
-//--------------------------------------------------------------------  
-//Assignment 1
-//Question 1
-//Written by Jinghao Lai 40041316 and   
-//--------------------------------------------------------------------
 
+//--------------------------------------------------------------------  
+// Assignment 1
+// Question 
+// Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
+//--------------------------------------------------------------------
 
 public class Item {
   
@@ -51,7 +51,7 @@ public Item(Item otherItem){
 
 //getter
 
-public String getID(){
+public String getId(){
 
     return id;
 
@@ -69,6 +69,32 @@ public int getYearOfPublication(){
     return yearOfPublication;
 
 }
+
+//setter
+
+public void setId(String id){
+
+    this.id=id;
+}
+
+public void setName(String name){
+
+    this.name=name;
+}
+
+
+public void setAuthor(String author){
+
+    this.author=author;
+}
+
+public void setYearOfPublication(int yearOfPublication){
+
+    this.yearOfPublication=yearOfPublication;
+
+
+}
+
 
 
 
