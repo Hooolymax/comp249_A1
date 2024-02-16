@@ -8,15 +8,15 @@ package Item;
 
 public class Item {
   
-private double ID;
-private String name;
-private int yearOfPublication;
+protected String ID;
+protected String name;
+protected int yearOfPublication;
 
 
 //default constructor
 public Item(){
 
-    this.ID=0;
+    this.ID="";
     this.name="";
     this.yearOfPublication=0;
 
@@ -48,7 +48,7 @@ public Item(Item otherItem){
 
 //getter
 
-public double getID(){
+public String getID(){
 
     return ID;
 
