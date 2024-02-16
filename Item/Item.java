@@ -17,7 +17,7 @@ protected int yearOfPublication;
 //default constructor
 public Item(){
 
-    this.ID="";
+    this.id="";
     this.name="";
     this.author = "";
     this.yearOfPublication=0;
@@ -51,7 +51,6 @@ public Item(Item otherItem){
 
 //getter
 
-public String getID(){
 public String getID(){
 
     return id;
