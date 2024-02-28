@@ -6,7 +6,7 @@ package Item;
 // Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
 //--------------------------------------------------------------------
 
-public class Item {
+public abstract class Item {
   
 protected String id;
 protected String name;
@@ -105,7 +105,7 @@ public void setYearOfPublication(int yearOfPublication){
 public String toString(){
 
 
-    return" ID "+ id+" Name "+name+" Year of  Publication "+ yearOfPublication;
+    return" ID "+ id+" Name "+name+ "Author" + author + "Year of  Publication "+ yearOfPublication;
 
 }
 

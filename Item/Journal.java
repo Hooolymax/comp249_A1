@@ -8,8 +8,8 @@ package Item;
 
 public class Journal extends Item{
     
-    protected int volNum;
-    protected int count = 0;
+    private int volNum;
+    private int count = 0;
 
     public Journal(){
         super();
@@ -38,6 +38,11 @@ public class Journal extends Item{
 
     public void setVolNum(int volNum) {
         this.volNum = volNum;
+    }
+
+    
+    public String toString() {
+        return "Journal [volNum=" + volNum + "]" + " ID "+ id+" Name "+name+ "Author" + author + "Year of  Publication "+ yearOfPublication;
     }
 
 

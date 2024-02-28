@@ -67,6 +67,7 @@ public class Client {
         this.id = id;
     }
 
+    
     public String toString() {
         return name + " has an ID " + id + ", phone " + phone + ", email " + email;
     }
