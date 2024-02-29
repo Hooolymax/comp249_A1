@@ -27,6 +27,7 @@ public Book(String id, String name, String author, int yearOfPublication, int nu
 
     super(name,author,yearOfPublication);
     this.numberOfPages=numberOfPages;
+    this.id = "B" + (int)(Math.random() * 9000000);
 
 }
 
@@ -36,6 +37,7 @@ public Book(String id, String name, String author, int yearOfPublication, int nu
  public Book(Book otherBook){
     super(otherBook);
     this.numberOfPages=otherBook.numberOfPages;
+
 
  }
 

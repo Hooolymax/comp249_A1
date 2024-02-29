@@ -9,13 +9,11 @@ import Client.*;;
 
 public class Driver {
 
-    private Item[] items;
+    private static Item[] items=new Item[20];
+    private static int count=0;
     private Journal[] journals;
     private Media[] medias;
     private static boolean quit = false; //flag to exit the program
-
-    
-
 
 
     public static void main(String[] args) throws Exception {
@@ -37,11 +35,59 @@ public class Driver {
         
     }
 
-    public void addItem(){
+    
+
+    
+
+
+
+    public void addItem(Item item){
+
+        //check if the item already exists
+
+        for (int i = 0; i < count; i++) {
+            if (items[i].getId().equals(item.getId())) {
+                System.out.println("Item with ID " + item.getId() + " already exists.");
+                return;
+            }
+        }
+
+
+
+
+        items[count] = item;
+        count++;
+        System.out.println("Item with ID " + item.getId() + " added successfully.");
+
+
+
 
     }
 
-    public void deleteItem(){
+    public void deleteItem(String itemId){
+
+    for (int i = 0; i < count; i++) {
+        // Check the if item to be deleted exists  
+        if (items[i].getId().equals(itemId)) {
+            // Shift all items one position
+            for (int j = i; j < count - 1; j++) {
+                items[j] = items[j + 1];
+            }
+            items[count - 1] = null; 
+
+            count--; // Decrease the count
+            System.out.println("Item with ID " + itemId + " removed successfully.");
+
+            return; 
+        }
+    }
+
+    // case the item was not found
+    System.out.println("Item with ID " + itemId + " not found.");
+
+
+
+
         
     }
 
