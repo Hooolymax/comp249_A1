@@ -14,6 +14,8 @@ protected String author;
 protected int yearOfPublication;
 
 
+
+
 //default constructor
 public Item(){
 
@@ -44,6 +46,7 @@ public Item(Item otherItem){
 
    
     this.name=otherItem.name;
+    this.author = otherItem.author;
     this.yearOfPublication=otherItem.yearOfPublication;
 
 
@@ -64,11 +67,21 @@ public String getName(){
 
 }
 
+public String getAuthor(){
+
+    return author;
+
+}
+
+
 public int getYearOfPublication(){
     
     return yearOfPublication;
 
 }
+
+
+
 
 //setter
 
