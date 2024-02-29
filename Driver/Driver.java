@@ -134,8 +134,55 @@ public class Driver {
     }
 
     public void editItem(){
+
+        //prompt the user to enter the item ID
+        Scanner scannerEdit = new Scanner(System.in);
+        System.out.println("Enter the ID of item you want to edit");
+
+        // Read user input for item ID
+        String itemId = scannerEdit.nextLine(); 
+
+        //find the item in the array
+        for (int i = 0; i < count; i++) {
+            if (items[i].getId().equals(itemId)){
+
+                System.out.println("Editing item with ID"+ items[i].getName()+items[i].getAuthor()+items[i].getYearOfPublication());
+
+                System.out.println("Enter new name for the item.");
+                String newName = scannerEdit.nextLine(); // Read new name
+                items[i].setName(newName); // Set new name
+
+                System.out.println("Enter new author for the item.");
+                String newAuthor = scannerEdit.nextLine(); // Read new author
+                items[i].setAuthor(newAuthor); // Set new author
+    
+                System.out.println("Enter new year of publication for the item.");
+                int newYearOfPublication = Integer.parseInt(scannerEdit.nextLine()); // Read new year of publication
+                items[i].setYearOfPublication(newYearOfPublication); // Set new year of publication
+    
+                System.out.println("Item updated successfully.");
+                return; // Exit the method after editing
+
+
+
+            }
+
+
+            // If the item is not found
+            System.out.println("Item with ID " + itemId + " not found.");
+
+
+        }
+
+
+
+
+
         
     }
+
+    
+
 
     public static void addClient() throws Exception { // index out of range in clients array
         System.out.println("Enter client name: ");
