@@ -9,28 +9,70 @@ import Client.*;;
 
 public class Driver {
 
-    private static Item[] items=new Item[20];
+    private static Client[] clients = new Client[1];
+    private static int numClient = 0;
+    private static Item[] items = new Item[20];
     private static int count=0;
     private Journal[] journals;
     private Media[] medias;
     private static boolean quit = false; //flag to exit the program
+    static Scanner cin = new Scanner(System.in);
 
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws Exception {
-
-        Scanner cin = new Scanner(System.in);
+        
         // menu and welcome message
+        System.out.println("Welcome to Alisa Ignatina 40267100 and Jinghao Lai 40041316 Library!");
+        System.out.println("Do you want to get a menu (enter 1) or do you want to run a predefined/hard-coded scenario (enter 2)");
         int userInput = cin.nextInt();
 
-        do{
-            switch(userInput){
-                // cases
-                default:
-                    // invalid input
-                    quit = true;
-                    break;
-            }
-        } while (!quit); // condition to exit
+        // menu
+        // exception handling if user input is invalid
+        if (userInput == 1){
+            do{
+                
+                // display menu
+                System.out.println("menu");
+                userInput = cin.nextInt();
+                // main menu loop for the interaction with a user
+                switch(userInput){
+                    // cases
+
+                    case 4:
+                        try{
+                            
+                            do{
+                                addClient();
+                                System.out.println("Do you want to add another client? ");
+                            } while (cin.next().equals("yes"));
+
+                        } catch (Exception IndexOutOfBoundsException){
+                            System.out.println("The client was not added, not enough space");
+                        }
+
+                        break;
+
+
+                    default:
+                        // input = 0, quit
+                        quit = true;
+                        break;
+                }
+    
+            } while (!quit); // condition to exit
+            
+        }
+
+
+        // predefined/hard-coded scenario
+        if (userInput == 2){
+
+            // create 3 obj
+            // create 3 users
+
+
+        }
+
         
         
     }
@@ -95,8 +137,16 @@ public class Driver {
         
     }
 
-    public void addClient(){
-        
+    public static void addClient() throws Exception { // index out of range in clients array
+        System.out.println("Enter client name: ");
+        String name = cin.next();
+        System.out.println("Enter client phone: ");
+        String phone = cin.next();
+        System.out.println("Enter client email: ");
+        String email = cin.next();
+        clients[numClient] = new Client(name, phone, email); // new client is added to clients array 
+        System.out.println("The following client was created: " + clients[numClient].toString());
+        numClient++;
     }
 
     public void deleteClient(){
