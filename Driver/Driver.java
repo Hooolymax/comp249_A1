@@ -169,10 +169,41 @@ public class Driver {
                         break;
 
 
+
                         // edit an item
                         case 3:
-                            editItem();
+                        
+                        System.out.println("Enter the item ID to edit:");
+                        String idEdit = cin.next();
+                    
+                        System.out.println("Enter new name:");
+                        String newName = cin.next();
+                        System.out.println("Enter new author:");
+                        String newAuthor = cin.next();
+                        System.out.println("Enter new year of publication:");
+                        int newYear = cin.nextInt();
+                        cin.nextLine(); 
+                    
+                        Integer newPages = null;
+                        Integer newVolume = null;
+                        String newType = null;
+                    
+                        if (idEdit.startsWith("B")) {
+                            System.out.println("Enter new number of pages:");
+                            newPages = cin.nextInt();
+                            cin.nextLine(); 
+                        } else if (idEdit.startsWith("J")) {
+                            System.out.println("Enter new volume number:");
+                            newVolume = cin.nextInt();
+                            cin.nextLine(); 
+                        } else if (idEdit.startsWith("M")) {
+                            System.out.println("Enter new media type:");
+                            newType = cin.nextLine();
+                        }
+                    
+                        editItem(idEdit, newName, newAuthor, newYear, newPages, newVolume, newType);
                         break;
+                        
 
                         // list all books
                         case 4:
@@ -323,7 +354,7 @@ public class Driver {
 
                         // Display the biggest book
                         case 15:
-                            System.out.println(getBiggestBook().toString());
+                            System.out.println(getBiggestBook(books).toString());
                         break;
 
                         
@@ -403,7 +434,7 @@ public class Driver {
             System.out.println("Is book1 equal to journal1? " + book1.equals(journal1)); // Expected: false
             System.out.println("Is journal3 equal to media3? " + journal3.equals(media3)); // Expected: false
 
-            // Create an array for each one of the types of items and an array for all items
+            // Create an array for each the types of items and an array for all items
             Book[] booksArray = {book1, book2, book3};
             Journal[] journalsArray = {journal1, journal2, journal3};
             Media[] mediasArray = {media1, media2, media3};
@@ -425,6 +456,22 @@ public class Driver {
             System.out.println(client3.toString());
 
 
+
+
+            //DIplay biggest book
+            Book biggestBook = getBiggestBook(booksArray);
+            if (biggestBook != null) {
+            // Check if a biggest book exists
+            System.out.println("The biggest book based on the number of pages is: " + biggestBook.toString());
+           } 
+           
+           else 
+
+           {
+            System.out.println("No books found in the collection.");
+           }
+        
+
         }
 
         
@@ -432,6 +479,8 @@ public class Driver {
     }
 
     
+
+
 
 
 
@@ -459,7 +508,7 @@ public class Driver {
 
 
 
-    //add item
+    //Add item
     public static void addItem(Item newItem){
 
         
@@ -556,53 +605,75 @@ public class Driver {
 
 
     
-    public static void editItem(){
 
-        //prompt the user to enter the item ID
-        Scanner scannerEdit = new Scanner(System.in);
-        System.out.println("Enter the ID of item you want to edit");
 
-        // Read user input for item ID
-        String itemId = scannerEdit.nextLine(); 
+    //edit item method
+    public static void editItem(String itemId, String newName, String newAuthor, int newYear, Integer newPages, Integer newVolume, String newType){
 
-        //find the item in the array
-        for (int i = 0; i < numItems; i++) {
-            if (items[i].getId().equals(itemId)){
-
-                System.out.println("Editing item with ID"+ items[i].getName()+items[i].getAuthor()+items[i].getYearOfPublication());
-
-                System.out.println("Enter new name for the item.");
-                String newName = scannerEdit.nextLine(); // Read new name
-                items[i].setName(newName); // Set new name
-
-                System.out.println("Enter new author for the item.");
-                String newAuthor = scannerEdit.nextLine(); // Read new author
-                items[i].setAuthor(newAuthor); // Set new author
+        Item itemToEdit = null;
+        int index = -1; // Index of the item in its respective array
     
-                System.out.println("Enter new year of publication for the item.");
-                int newYearOfPublication = Integer.parseInt(scannerEdit.nextLine()); // Read new year of publication
-                items[i].setYearOfPublication(newYearOfPublication); // Set new year of publication
-    
-                System.out.println("Item updated successfully.");
-                return; // Exit the method after editing
-
-
-
+        // Identify and find the item by its ID
+        if (itemId.startsWith("B")) {
+            for (int i = 0; i < numBooks; i++) {
+                if (books[i] != null && books[i].getId().equals(itemId)) {
+                    itemToEdit = books[i];
+                    index = i;
+                    break;
+                }
             }
-
-
-            // If the item is not found
-            System.out.println("Item with ID " + itemId + " not found.");
-
-
+        } else if (itemId.startsWith("J")) {
+            for (int i = 0; i < numJournals; i++) {
+                if (journals[i] != null && journals[i].getId().equals(itemId)) {
+                    itemToEdit = journals[i];
+                    index = i;
+                    break;
+                }
+            }
+        } else if (itemId.startsWith("M")) {
+            for (int i = 0; i < numMedias; i++) {
+                if (medias[i] != null && medias[i].getId().equals(itemId)) {
+                    itemToEdit = medias[i];
+                    index = i;
+                    break;
+                }
+            }
         }
-
-
-
-
-
+    
+        // Update information if item found
+        if (itemToEdit != null) {
+            itemToEdit.setName(newName);
+            itemToEdit.setAuthor(newAuthor);
+            itemToEdit.setYearOfPublication(newYear);
+    
+            if (itemToEdit instanceof Book && newPages != null) {
+                ((Book)itemToEdit).setNumberOfPages(newPages);
+            } else if (itemToEdit instanceof Journal && newVolume != null) {
+                ((Journal)itemToEdit).setVolNum(newVolume);
+            } else if (itemToEdit instanceof Media && newType != null) {
+                ((Media)itemToEdit).setType(newType);
+            }
+    
+            // cahneg the items array
+            items[index] = itemToEdit;
+            if (itemToEdit instanceof Book) {
+                books[index] = (Book) itemToEdit;
+            } else if (itemToEdit instanceof Journal) {
+                journals[index] = (Journal) itemToEdit;
+            } else if (itemToEdit instanceof Media) {
+                medias[index] = (Media) itemToEdit;
+            }
+    
+            System.out.println("Item updated successfully.");
+        } else {
+            System.out.println("Item with ID " + itemId + " not found.");
+        }
         
     }
+
+
+
+
 
 
     
@@ -760,21 +831,26 @@ public class Driver {
     }
 
     
-    public static Book getBiggestBook(){
-        int max = 0;
-        int maxi = -1;
-        for (int i = 0; i < numBooks; i++){
-            if (books[i].getNmuberOfPages() > max){
-                max = books[i].getNmuberOfPages();
-                maxi = i;
+
+    //find biggest book
+    public static Book getBiggestBook(Book[] booksArray) {
+        if (booksArray == null || booksArray.length == 0) {
+            return null; // No books available
+        }
+    
+        Book biggestBook = booksArray[0]; 
+        for (Book book : booksArray) {
+            if (book != null && (biggestBook == null || book.getNumberOfPages() > biggestBook.getNumberOfPages())) {
+                biggestBook = book;
             }
         }
-        
-        return books[maxi];
-        
+        return biggestBook; // Return the biggest book
     }
  
-    
+
+
+
+    //copy book
     public Book[] copyBooks(Book[] originalBooks) {
         if (originalBooks == null) {
             return null; 

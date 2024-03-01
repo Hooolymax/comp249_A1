@@ -45,8 +45,15 @@ public Book(String name, String author, int yearOfPublication, int numberOfPages
 //getter
 
 
-public int getNmuberOfPages(){
+public int getNumberOfPages(){
     return numberOfPages;
+}
+
+
+//setter
+
+public void setNumberOfPages(int numberOfPages){
+    this.numberOfPages=numberOfPages;
 }
  
 public String toString() {

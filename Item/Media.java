@@ -41,7 +41,7 @@ public class Media extends Item{
     }
 
     public String toString() {
-        return "Media [type=" + type + "]" + " ID "+ id+" Name "+name+ " Autho r" + author + " Year of  Publication "+ yearOfPublication;
+        return "Media [type=" + type + "]" + " ID "+ id+" Name "+name+ " Author" + author + " Year of  Publication "+ yearOfPublication;
     }
 
 
