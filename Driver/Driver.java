@@ -468,20 +468,42 @@ public class Driver {
 
 
 
-
+            System.out.println("");
             //DIplay biggest book
+            System.out.println("Diplay biggest book");
             Book biggestBook = getBiggestBook(booksArray);
-            if (biggestBook != null) {
-            // Check if a biggest book exists
-            System.out.println("The biggest book based on the number of pages is: " + biggestBook.toString());
-           } 
-           
-           else 
+            
+            System.out.println("The biggest book is: " + biggestBook.toString());
 
-           {
-            System.out.println("No books found in the collection.");
-           }
+
+
+            System.out.println("");
+            System.out.println("Display the copy book");
+
+            //copy book
+            Book[] copiedBooksArray = copyBooks(booksArray);
+
+            for (Book copiedBook : copiedBooksArray) {
+                if (copiedBook != null) {
+                    System.out.println(copiedBook.toString());
+                }
+            }
+
+
+
+
+           
+           
+           
         
+
+
+
+
+
+
+
+
 
         }
 
