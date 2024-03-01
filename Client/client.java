@@ -19,7 +19,8 @@ public class Client {
     private String phone;
     private String email;
     private Item[] leasedItems;
-    private int[] numOfLeasedItems = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public final int maxNumOfLeasedItems = 10;
+    private int numOfLeasedItems = 0;
     
     // default constructor
     public Client() {
@@ -27,7 +28,7 @@ public class Client {
         this.phone = "n/a";
         this.email = "n/a";
         this.id ++;
-        this.leasedItems = new Item[10];
+        this.leasedItems = new Item[maxNumOfLeasedItems];
     }
 
     // parameterized constructor
@@ -36,7 +37,7 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.id ++;
-        this.leasedItems = new Item[10];
+        this.leasedItems = new Item[maxNumOfLeasedItems];
     }
 
     // getters 
@@ -77,7 +78,14 @@ public class Client {
         this.id = id;
     }
 
-    public void addLeasedItem()
+    public boolean addLeasedItem(Item item) {
+        if (numOfLeasedItems < maxNumOfLeasedItems){
+            leasedItems[numOfLeasedItems] = item;
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     public String toString() {
         return name + " has an ID " + id + ", phone " + phone + ", email " + email;

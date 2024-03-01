@@ -11,13 +11,18 @@ public class Driver {
 
     private static Client[] clients = new Client[20];
     private static int numClient = 0;
-    private static Item[] items = new Item[30];
+    private final static int maxnumItems = 30;
+    private static Item[] items = new Item[maxnumItems];
     private static int count=0;
-    private static Book[]  books = new Book[10];
-    private static Journal[] journals = new Journal[10];
-    private static Media[] medias = new Media[10];
+    private final static int maxnumBooks = 10;
+    private static Book[]  books = new Book[maxnumBooks];
+    private final static int maxnumJournals = 10;
+    private static Journal[] journals = new Journal[maxnumJournals];
+    private final static int maxnumMedias = 10;
+    private static Media[] medias = new Media[maxnumMedias];
     private static boolean quit = false; //flag to exit the program
     static Scanner cin = new Scanner(System.in);
+   
 
     public static void main(String[] args) {
 
