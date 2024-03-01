@@ -238,7 +238,7 @@ public class Driver {
 
     }
 
-    // alisa
+   
     public static void printJournals(){
         for (int i = 0; i < journals.length; i++){
             System.out.println(journals[i].toString());
@@ -250,7 +250,7 @@ public class Driver {
         
     }
 
-    // alisa
+    
     public static void printItems(){
         for (int i = 0; i < items.length; i++){
             System.out.println(items[i].toString());
@@ -318,7 +318,7 @@ public class Driver {
 
     }
 
-    // alisa
+    
     public static Book getBiggestBook(){
         int max = 0;
         int maxi = -1;

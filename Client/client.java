@@ -1,5 +1,7 @@
 package Client;
 
+import Item.*;
+
 //--------------------------------------------------------------------  
 // Assignment 1
 // Question 
@@ -16,6 +18,8 @@ public class Client {
     private String name;
     private String phone;
     private String email;
+    private Item[] leasedItems;
+    private int[] numOfLeasedItems = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
     // default constructor
     public Client() {
@@ -23,6 +27,7 @@ public class Client {
         this.phone = "n/a";
         this.email = "n/a";
         this.id ++;
+        this.leasedItems = new Item[10];
     }
 
     // parameterized constructor
@@ -31,6 +36,7 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.id ++;
+        this.leasedItems = new Item[10];
     }
 
     // getters 
@@ -50,6 +56,10 @@ public class Client {
         return id;
     }
 
+    public Item[] getLeasedItems(){
+        return leasedItems;
+    }
+
     // setters
     public void setName(String name) {
         this.name = name;
@@ -67,6 +77,7 @@ public class Client {
         this.id = id;
     }
 
+    public void addLeasedItem()
     
     public String toString() {
         return name + " has an ID " + id + ", phone " + phone + ", email " + email;

@@ -12,6 +12,7 @@ protected String id;
 protected String name;
 protected String author;
 protected int yearOfPublication;
+protected boolean isAvailable;
 
 
 
@@ -23,6 +24,7 @@ public Item(){
     this.name="";
     this.author = "";
     this.yearOfPublication=0;
+    this.isAvailable = true;
 
 
 
@@ -36,6 +38,7 @@ public Item(String name, String author, int yearOfPublication){
     this.name=name;
     this.author = author;
     this.yearOfPublication=yearOfPublication;
+    this.isAvailable = true;
 
 
 }
@@ -48,7 +51,7 @@ public Item(Item otherItem){
     this.name=otherItem.name;
     this.author = otherItem.author;
     this.yearOfPublication=otherItem.yearOfPublication;
-
+    this.isAvailable = true;
 
 }
 
@@ -80,7 +83,9 @@ public int getYearOfPublication(){
 
 }
 
-
+public boolean IsAvailable(){
+    return isAvailable;
+}
 
 
 //setter
@@ -91,6 +96,7 @@ public void setId(String id){
     this.id=id;
 } 
 */
+
 
 public void setName(String name){
 
@@ -109,6 +115,11 @@ public void setYearOfPublication(int yearOfPublication){
 
 
 }
+
+public void setAvailable(boolean isAvailable) {
+    this.isAvailable = isAvailable;
+}
+
 
 
 
@@ -150,6 +161,7 @@ public boolean equals(Object obj) {
 
     return false;
 }
+
 
 
 
