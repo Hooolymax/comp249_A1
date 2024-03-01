@@ -158,6 +158,8 @@ public class Driver {
 
 
 
+
+                       
                         // delete an item
                         case 2:
 
@@ -176,6 +178,8 @@ public class Driver {
                         
                         System.out.println("Enter the item ID to edit:");
                         String idEdit = cin.next();
+
+                        
                     
                         System.out.println("Enter new name:");
                         String newName = cin.next();
@@ -359,11 +363,15 @@ public class Driver {
                         
                         // Make a copy of the books array
                         case 16:
-                            Book[] newBooks = copyBooks(books);
-                            for (int i =0; i < newBooks.length; i++){
-                                System.out.println(newBooks[i].toString());
-                            }
 
+                        System.out.println("The new copied book array:");
+                        Book[] copiedBooksArray = copyBooks(books);
+
+                        for (Book copiedBook : copiedBooksArray) {
+                            if (copiedBook != null) {
+                                System.out.println(copiedBook.toString());
+                            }
+                        }
                         break;
 
                         case 17:
@@ -735,6 +743,10 @@ public class Driver {
         }
     }
 
+
+
+
+    
 
     public static void addClient(String name, String phone, String email) throws IndexOutOfBoundsException { 
 
