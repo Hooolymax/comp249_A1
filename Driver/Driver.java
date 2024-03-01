@@ -13,6 +13,7 @@ public class Driver {
     private static int numClient = 0;
     private static Item[] items = new Item[20];
     private static int count=0;
+    private static Book[]  books;
     private Journal[] journals;
     private Media[] medias;
     private static boolean quit = false; //flag to exit the program
@@ -25,6 +26,7 @@ public class Driver {
         System.out.println("Welcome to Alisa Ignatina 40267100 and Jinghao Lai 40041316 Library!");
         System.out.println("Do you want to get a menu (enter 1) or do you want to run a predefined/hard-coded scenario (enter 2)");
         int userInput = cin.nextInt();
+        int id; String name, email, phone;
 
         // menu
         // exception handling if user input is invalid
@@ -36,18 +38,26 @@ public class Driver {
                 userInput = cin.nextInt();
                 // main menu loop for the interaction with a user
                 switch(userInput){
-                    // cases
+                    
+                    case 1:
+
+
+                    case 2:
+
+
+                    case 3:
+
 
                     case 4:
                         
                         try{     
                             do{
                                 System.out.println("Enter client name: ");
-                                String name = cin.next();
+                                name = cin.next();
                                 System.out.println("Enter client phone: ");
-                                String phone = cin.next();
+                                phone = cin.next();
                                 System.out.println("Enter client email: ");
-                                String email = cin.next();
+                                email = cin.next();
 
                                 addClient(name, phone, email);
 
@@ -66,7 +76,7 @@ public class Driver {
                     case 5:
 
                         System.out.println("Enter client ID you want to delete: ");
-                        int id = cin.nextInt(); 
+                        id = cin.nextInt(); 
                         if (deleteClient(id)){
                             System.out.println("The client was removed successfully");
                         } else {
@@ -78,7 +88,20 @@ public class Driver {
 
                     case 6:
 
-                    
+                        System.out.println("Enter client ID you want to edit: ");
+                        id = cin.nextInt(); 
+                        System.out.println("Enter new name for the client");
+                        name = cin.next();
+                        System.out.println("Enter new phone for the client");
+                        phone = cin.next();
+                        System.out.println("Enter new email for the client");
+                        email = cin.next();
+                        if (editClient(id, name, phone, email)){
+                            System.out.println("The client was edited successfully: " + clients[numClient].toString());
+                        } else {
+                            System.out.println("The client was not found");
+                        }
+
                         break;
                     
                     default:
@@ -209,7 +232,26 @@ public class Driver {
         
     }
 
-    
+
+    // max
+    public static void printBooks(){
+
+    }
+
+    // alisa
+    public static void printJournals(){
+        
+    }
+
+    // max
+    public static void printMedias(){
+        
+    }
+
+    // alisa
+    public static void printItems(){
+        
+    }
 
 
     public static void addClient(String name, String phone, String email) throws Exception { 
@@ -220,11 +262,12 @@ public class Driver {
 
     }
 
-    // alisa
+   
     public static boolean deleteClient(int id){
 
         for (int i=0; i<clients.length; i++){
             if (clients[i].getId() == id){
+                // shift items after to the one position to the left
                 for (int j = i; j < numClient - 1; j++) {
                     clients[j] = clients[j + 1];
                 }
@@ -233,12 +276,22 @@ public class Driver {
                 return true;
             }
         }
+        // if client was not found
         return false;
     }
 
-    // alisa
-    public void editClient(){
-        
+
+    public static boolean editClient(int id, String name, String phone, String email){
+        for (int i=0; i<clients.length; i++){
+            if (clients[i].getId() == id){
+                clients[i].setName(name);
+                clients[i].setPhone(phone);
+                clients[i].setEmail(email);
+                return true;
+            }
+        }
+        // if client was not found
+        return false;
     }
 
     // alisa
@@ -252,17 +305,27 @@ public class Driver {
     }
 
     // alisa
-    public void showItems(){
+    public void showItemsLeasedByClient(){
 
     }
 
      // max
-    public void showAllItems(){
+    public void showAllItemsLeased(){
 
     }
 
     // alisa
-    public void getBiggestBook(){
+    public static Book getBiggestBook(){
+        int max = 0;
+        int maxi = -1;
+        for (int i = 0; i < books.length; i++){
+            if (books[i].getNmuberOfPages() > max){
+                max = books[i].getNmuberOfPages();
+                maxi = i;
+            }
+        }
+        
+        return books[maxi];
         
     }
  

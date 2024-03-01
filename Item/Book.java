@@ -44,7 +44,7 @@ public Book(String id, String name, String author, int yearOfPublication, int nu
 //getter
 
 
-public int getNmuberOfPages(int numberOfPages){
+public int getNmuberOfPages(){
     return numberOfPages;
 }
  
