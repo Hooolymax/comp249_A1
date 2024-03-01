@@ -83,6 +83,7 @@ public class Driver {
                         
                         
                         // add an item
+
                         case 1:
                         {
                          // Initialize scanner for user input
@@ -111,7 +112,7 @@ public class Driver {
 
                         Book newBook = new Book(newName, newAuthor, newYearOfPublication, newNumberOfPages);
                         addItem(newBook);
-                    break;
+                        break;
 
                      case "journal":
                      System.out.println("Enter Journal Name:");
@@ -148,13 +149,40 @@ public class Driver {
                 break;
 
             }
+
+            break;
     }
 
 
 
 
+                       
                         // delete an item
                         case 2:
+                        System.out.println("Enter the item ID to delete");
+                       
+
+
+
+                        String idDelete=cin.next();
+
+
+                        deleteItem(idDelete); 
+                        break;
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+                        
 
 
                         // edit an item
@@ -433,10 +461,12 @@ public class Driver {
 
 
 
+
+    //add item
     public static void addItem(Item newItem){
 
         
-        // Add item based on its specific type
+    // Add item based on its specific type
     if (newItem instanceof Book) {
         if (numBooks >= maxnumBooks) {
             System.out.println("Cannot add new book, Book inventory is full.");
@@ -469,33 +499,69 @@ public class Driver {
 
     }
 
-    public void deleteItem(String itemId){
 
-    for (int i = 0; i < numItems; i++) {
-        // Check the if item to be deleted exists  
-        if (items[i].getId().equals(itemId)) {
-            // Shift all items one position
-            for (int j = i; j < numItems - 1; j++) {
-                items[j] = items[j + 1];
+
+
+
+
+
+    
+    //Delete Item method
+    public static void deleteItem(String itemId) {
+        boolean found = false;
+    
+        // Check the type of item and remove it from array
+        if (itemId.startsWith("B")) {
+            for (int i = 0; i < numBooks; i++) {
+                if (books[i] != null && books[i].getId().equals(itemId)) {
+                    System.arraycopy(books, i + 1, books, i, numBooks - i - 1);
+                    books[numBooks - 1] = null; 
+                    numBooks--; // Decrease the count
+                    found = true;
+                    break; 
+                }
             }
-            items[numItems - 1] = null; 
-
-            numItems--; // Decrease the count
+        } else if (itemId.startsWith("J")) {
+            for (int i = 0; i < numJournals; i++) {
+                if (journals[i] != null && journals[i].getId().equals(itemId)) {
+                    System.arraycopy(journals, i + 1, journals, i, numJournals - i - 1);
+                    journals[numJournals - 1] = null; 
+                    numJournals--; // Decrease the count
+                    found = true;
+                    break; 
+                }
+            }
+        } else if (itemId.startsWith("M")) {
+            for (int i = 0; i < numMedias; i++) {
+                if (medias[i] != null && medias[i].getId().equals(itemId)) {
+                    System.arraycopy(medias, i + 1, medias, i, numMedias - i - 1);
+                    medias[numMedias - 1] = null; 
+                    numMedias--;
+                    found = true;
+                    break; 
+                }
+            }
+        }
+    
+        // Remove from the items array
+        if (found) {
+            for (int i = 0; i < numItems; i++) {
+                if (items[i] != null && items[i].getId().equals(itemId)) {
+                    System.arraycopy(items, i + 1, items, i, numItems - i - 1);
+                    items[numItems - 1] = null;
+                    numItems--;
+                    break; 
+                }
+            }
             System.out.println("Item with ID " + itemId + " removed successfully.");
-
-            return; 
+        } else {
+            System.out.println("Item with ID " + itemId + " not found.");
         }
     }
 
-    // case the item was not found
-    System.out.println("Item with ID " + itemId + " not found.");
 
 
-
-
-        
-    }
-
+    
     public void editItem(){
 
         //prompt the user to enter the item ID
@@ -545,7 +611,7 @@ public class Driver {
     }
 
 
-    
+    // max
     public static void printBooks(){
         for (int i = 0; i < numBooks; i++){
             System.out.println(books[i].toString());
