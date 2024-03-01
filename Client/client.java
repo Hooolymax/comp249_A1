@@ -82,6 +82,7 @@ public class Client {
     public boolean addLeasedItem(Item item) throws IndexOutOfBoundsException {
         if (item.isAvailable()){
             leasedItems[numOfLeasedItems] = item;
+            item.setAvailable(false);
             return true;
         } else {
             return false;
