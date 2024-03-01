@@ -159,34 +159,20 @@ public class Driver {
                        
                         // delete an item
                         case 2:
-                        System.out.println("Enter the item ID to delete");
-                       
 
-
-
-                        String idDelete=cin.next();
-
-
-                        deleteItem(idDelete); 
-                        break;
-
-                    
-
-
-
-
-
-
-
-
-
-
-
+                            System.out.println("Enter the item ID to delete");
                         
+                            String idDelete=cin.next();
+
+                            deleteItem(idDelete); 
+
+                        break;
 
 
                         // edit an item
                         case 3:
+                            editItem();
+                        break;
 
                         // list all books
                         case 4:
@@ -303,6 +289,14 @@ public class Driver {
                 
                         // return an item from a client
                         case 12:
+                            System.out.println("Enter ID of client who wants to return an item: ");
+                            clientID = cin.nextInt();
+                            System.out.println("Enter ID of item the client wants to return: ");
+                            itemID = cin.next();
+
+                            returnItemFromClient(itemID, clientID);
+                        break;
+
 
                         // show all items leased by a client
                         case 13:
@@ -332,9 +326,12 @@ public class Driver {
                             System.out.println(getBiggestBook().toString());
                         break;
 
-                        // max
+                        
                         // Make a copy of the books array
                         case 16:
+                            
+
+                        break;
                         
                         default:
                             // input = 0, quit
@@ -500,11 +497,6 @@ public class Driver {
     }
 
 
-
-
-
-
-
     
     //Delete Item method
     public static void deleteItem(String itemId) {
@@ -521,6 +513,7 @@ public class Driver {
                     break; 
                 }
             }
+
         } else if (itemId.startsWith("J")) {
             for (int i = 0; i < numJournals; i++) {
                 if (journals[i] != null && journals[i].getId().equals(itemId)) {
@@ -531,6 +524,7 @@ public class Driver {
                     break; 
                 }
             }
+
         } else if (itemId.startsWith("M")) {
             for (int i = 0; i < numMedias; i++) {
                 if (medias[i] != null && medias[i].getId().equals(itemId)) {
@@ -562,7 +556,7 @@ public class Driver {
 
 
     
-    public void editItem(){
+    public static void editItem(){
 
         //prompt the user to enter the item ID
         Scanner scannerEdit = new Scanner(System.in);
@@ -611,7 +605,7 @@ public class Driver {
     }
 
 
-    // max
+    
     public static void printBooks(){
         for (int i = 0; i < numBooks; i++){
             System.out.println(books[i].toString());
@@ -697,7 +691,7 @@ public class Driver {
     }
 
      
-    public void returnItemFromClient(String itemID, int clientID) throws IllegalArgumentException, IndexOutOfBoundsException{
+    public static void returnItemFromClient(String itemID, int clientID) {
         try {
             int clientIndex = findClientNumByID(clientID);
             if (clientIndex == -1) { // Check if client exists
@@ -780,7 +774,7 @@ public class Driver {
         
     }
  
-    //max
+    
     public Book[] copyBooks(Book[] originalBooks) {
         if (originalBooks == null) {
             return null; 
