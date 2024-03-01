@@ -49,7 +49,9 @@ public int getNmuberOfPages(){
     return numberOfPages;
 }
  
-
+public String toString() {
+    return "Book [number Of Pages=" + numberOfPages + "]" + " ID "+ id+" Name "+name+ " Author " + author + " Year of  Publication "+ yearOfPublication;
+}
 
 
 

@@ -42,7 +42,7 @@ public class Journal extends Item{
 
     
     public String toString() {
-        return "Journal [volNum=" + volNum + "]" + " ID "+ id+" Name "+name+ "Author" + author + "Year of  Publication "+ yearOfPublication;
+        return "Journal [volNum=" + volNum + "]" + " ID "+ id+" Name "+name+ " Author " + author + " Year of  Publication "+ yearOfPublication;
     }
 
 

@@ -334,6 +334,74 @@ public class Driver {
             // create 3 obj
             // create 3 users
 
+            // Create at least 3 objects from each type of items
+            Book book1 = new Book("The Lord of the Rings", "J.R.R Tolkien", 1954, 300);
+            Book book2 = new Book("The Hobbit", "J.R.R Tolkien", 1952, 350);
+            Book book3 = new Book("The Silmarillion", "J.R.R Tolkien", 1952, 280);
+
+            Journal journal1 = new Journal("Journal 1", "Author D", 2024, 1);
+            Journal journal2 = new Journal("Journal 2", "Author E", 2025, 2);
+            Journal journal3 = new Journal("Journal 3", "Author F", 2022, 3);
+
+            Media media1 = new Media("Media 1", "Author G", 2027, "Video");
+            Media media2 = new Media("Media 2", "Author H", 2028, "Audio");
+            Media media3 = new Media("Media 3", "Author I", 2029, "Interactive");
+
+            // Display information of items
+            System.out.println("Display the items information");
+            System.out.println(book1);
+            System.out.println(book2);
+            System.out.println(book3);
+
+            System.out.println(journal1);
+            System.out.println(journal2);
+            System.out.println(journal3);
+
+            System.out.println(media1);
+            System.out.println(media2);
+            System.out.println(media3);
+
+            // Test the equality from same class
+
+
+            System.out.println("");
+            System.out.println("Test the equality");
+            System.out.println("Is book1 equal to book2? " + book1.equals(book2)); // Expected: false
+            System.out.println("Is book2 equal to book3? " + book2.equals(book3)); // Expected: false
+
+          
+            System.out.println("Is journal2 equal to journal3? " + journal2.equals(journal3)); // Expected: false
+            System.out.println("Is journal1 equal to journal1? " + journal1.equals(journal1)); // Expected: true
+
+           
+            System.out.println("Is media1 equal to media3? " + media2.equals(media3)); // Expected: false
+            System.out.println("Is media1 equal to media1? " + media1.equals(media1)); // Expected: true
+
+            //Test the equality from different classes
+            System.out.println("Is book1 equal to journal1? " + book1.equals(journal1)); // Expected: false
+            System.out.println("Is journal3 equal to media3? " + journal3.equals(media3)); // Expected: false
+
+            // Create an array for each one of the types of items and an array for all items
+            Book[] booksArray = {book1, book2, book3};
+            Journal[] journalsArray = {journal1, journal2, journal3};
+            Media[] mediasArray = {media1, media2, media3};
+            Item[] allItemsArray = {book1, book2, book3, journal1, journal2, journal3, media1, media2, media3};
+
+            // Create 3 Client1
+            Client client1 = new Client("C1", "514-456-7890", "client1@gmail.com");
+            Client client2 = new Client("C2", "514-765-4321", "client2@gmail.com");
+            Client client3 = new Client("C3", "514-123-7890", "client3@gmail.com");
+
+
+
+
+            // Display their information
+            System.out.println("");
+            System.out.println("Display the clients information");
+            System.out.println(client1);
+            System.out.println(client2);
+            System.out.println(client3);
+
 
         }
 
@@ -342,6 +410,11 @@ public class Driver {
     }
 
     
+
+
+
+
+    /*-----------------------------  method  -------------------------------*/
 
     public static int findItemNumByID(String id) throws IllegalArgumentException {
         for (int i = 0; i< numItems; i++){
