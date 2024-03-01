@@ -84,6 +84,74 @@ public class Driver {
                         // max
                         // add an item
                         case 1:
+                        {
+                         // Initialize scanner for user input
+                        Scanner scAddItem = new Scanner(System.in);
+
+   
+                        System.out.println("What type of item would you like to add? Enter book, journal or media.");
+                        String itemType = scAddItem.nextLine().trim().toLowerCase(); // Normalize input
+
+                        // Attributes for all item types
+                        String newName, newAuthor, newType;
+                        int newYearOfPublication, newNumberOfPages, newVolumeNumber;
+
+                        // Add item based on user input
+                        switch (itemType) {
+                        case "book":
+                        System.out.println("Enter Book Name:");
+                        newName = scAddItem.nextLine();
+                        System.out.println("Enter Author:");
+                        newAuthor = scAddItem.nextLine();
+                        System.out.println("Enter Year of Publication:");
+                        newYearOfPublication = scAddItem.nextInt();
+                        System.out.println("Enter Number of Pages:");
+                        newNumberOfPages = scAddItem.nextInt();
+                        scAddItem.nextLine(); // Clear scanner buffer
+
+                        Book newBook = new Book(newName, newAuthor, newYearOfPublication, newNumberOfPages);
+                        addItem(newBook);
+                    break;
+
+                     case "journal":
+                     System.out.println("Enter Journal Name:");
+                     newName = scAddItem.nextLine();
+                     System.out.println("Enter Author:");
+                     newAuthor = scAddItem.nextLine();
+                     System.out.println("Enter Year of Publication:");
+                     newYearOfPublication = scAddItem.nextInt();
+                     System.out.println("Enter Volume Number:");
+                     newVolumeNumber = scAddItem.nextInt();
+                     scAddItem.nextLine(); // Clear scanner buffer
+
+                     Journal newJournal = new Journal(newName, newAuthor, newYearOfPublication, newVolumeNumber);
+                    addItem(newJournal);
+                    break;
+
+                    case "media":
+                    System.out.println("Enter Media Name:");
+                    newName = scAddItem.nextLine();
+                    System.out.println("Enter Author:");
+                    newAuthor = scAddItem.nextLine();
+                    System.out.println("Enter Year of Publication:");
+                    newYearOfPublication = scAddItem.nextInt();
+                    scAddItem.nextLine(); // Clear buffer before reading next String
+                    System.out.println("Enter the type");
+                    newType = scAddItem.nextLine();
+
+                    Media newMedia = new Media(newName, newAuthor, newYearOfPublication, newType);
+                    addItem(newMedia);
+                    break;
+
+                 default:
+                 System.out.println("Invalid item type entered.");
+                break;
+
+            }
+    }
+
+
+
 
                         // max
                         // delete an item
@@ -224,6 +292,13 @@ public class Driver {
                         //max
                         // show all leased items (by all clients)
                         case 14:
+                        showAllItemsLeased();
+                        break;
+                        
+
+
+
+
 
                         // Display the biggest book
                         case 15:
@@ -288,24 +363,37 @@ public class Driver {
 
 
 
-    public void addItem(Item item){
+    public static void addItem(Item newItem){
 
-        //check if the item already exists
-
-        for (int i = 0; i < numItems; i++) {
-            if (items[i].getId().equals(item.getId())) {
-                System.out.println("Item with ID " + item.getId() + " already exists.");
-                return;
-            }
+        
+        // Add item based on its specific type
+    if (newItem instanceof Book) {
+        if (numBooks >= maxnumBooks) {
+            System.out.println("Cannot add new book, Book inventory is full.");
+            return;
         }
+        books[numBooks] = (Book) newItem;
+        numBooks++;
+    } else if (newItem instanceof Journal) {
+        if (numJournals >= maxnumJournals) {
+            System.out.println("Cannot add new journal, Journal inventory is full.");
+            return;
+        }
+        journals[numJournals] = (Journal) newItem;
+        numJournals++;
+    } else if (newItem instanceof Media) {
+        if (numMedias >= maxnumMedias) {
+            System.out.println("Cannot add new media, Media inventory is full.");
+            return;
+        }
+        medias[numMedias] = (Media) newItem;
+        numMedias++;
+    }
 
-
-
-
-        items[numItems] = item;
-        numItems++;
-        System.out.println("Item with ID " + item.getId() + " added successfully.");
-
+    // Add to the general items array regardless of type
+    items[numItems] = newItem;
+    numItems++;
+    System.out.println("New item added successfully: " + newItem.toString());
 
 
 
@@ -389,7 +477,9 @@ public class Driver {
 
     // max
     public static void printBooks(){
-
+        for (int i = 0; i < numBooks; i++){
+            System.out.println(books[i].toString());
+        }
     }
 
    
@@ -401,7 +491,9 @@ public class Driver {
 
     // max
     public static void printMedias(){
-        
+        for (int i = 0; i < numMedias; i++){
+            System.out.println(medias[i].toString());
+        }
     }
 
     
@@ -469,7 +561,35 @@ public class Driver {
     }
 
      // max
-    public void returnItemFromClient(){
+    public void returnItemFromClient(String itemID, int clientID) throws IllegalArgumentException, IndexOutOfBoundsException{
+        try {
+            int clientIndex = findClientNumByID(clientID);
+            if (clientIndex == -1) { // Check if client exists
+                System.out.println("Client with ID " + clientID + " does not exist.");
+                return;
+            }
+    
+            int itemIndex = findItemNumByID(itemID);
+            if (itemIndex == -1) { // Check if item exists
+                System.out.println("Item with ID " + itemID + " does not exist.");
+                return;
+            }
+    
+            // Attempt to remove the item from the client's list of leased items
+            if (clients[clientIndex].removeLeasedItem(items[itemIndex])) {
+                System.out.println("Item " + itemID + " successfully returned by client " + clientID + ".");
+            } else {
+                System.out.println("Failed to return item " + itemID + " by client " + clientID + ": item was not leased by this client.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid client or item ID.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Client or Item index out of bounds.");
+        }
+
+
+
+
 
     }
 
@@ -482,7 +602,30 @@ public class Driver {
     }
 
      // max
-    public void showAllItemsLeased(){
+    public static void showAllItemsLeased(){
+
+        boolean foundLeasedItems = false;
+        System.out.println("List of all leased items:");
+    
+        // Iterate through all clients
+        for (int i = 0; i < numClients; i++) {
+            Client client = clients[i]; // Get the current client
+            Item[] leasedItems = client.getLeasedItems(); // Get the leased items for the current client
+    
+            // Check each item to see if it's leased
+            for (int j = 0; j < client.maxNumOfLeasedItems; j++) {
+                Item item = leasedItems[j];
+                if (item != null) { // If there's an item in this slot
+                    foundLeasedItems = true; // We have found at least one leased item
+                    System.out.println("Client ID " + client.getId() + " (" + client.getName() + ") has leased item ID " + item.getId() + ": " + item.getName());
+                }
+            }
+        }
+    
+        if (!foundLeasedItems) {
+            System.out.println("No items are currently leased.");
+        }
+
 
     }
 
@@ -502,9 +645,26 @@ public class Driver {
     }
  
     //max
-    public void copyBooks(){
-
+    public Book[] copyBooks(Book[] originalBooks) {
+        if (originalBooks == null) {
+            return null; 
+        }
+    
+        // Initialize a new array
+        Book[] copiedBooks = new Book[originalBooks.length];
+    
+        // Iterate through the original array, copying each Book
+        for (int i = 0; i < originalBooks.length; i++) {
+            if (originalBooks[i] != null) {
+                copiedBooks[i] = new Book(originalBooks[i]); //use copy constructor
+            } else {
+                copiedBooks[i] = null;
+            }
+        }
+    
+        return copiedBooks; // Return the deep copy of the book array
     }
+    
 
 
    

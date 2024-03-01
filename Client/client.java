@@ -100,5 +100,25 @@ public class Client {
     }
 
 
+
+    //remove leased item
+    public boolean removeLeasedItem(Item item) {
+        for (int i = 0; i < numOfLeasedItems; i++) {
+            if (leasedItems[i].equals(item)) { // Check if this is the item to remove
+
+                // Item found, shift all subsequent items one place
+                for (int j = i; j < numOfLeasedItems - 1; j++) {
+                    leasedItems[j] = leasedItems[j + 1];
+                }
+                leasedItems[numOfLeasedItems - 1] = null; 
+                numOfLeasedItems--; // Decrement count of leased items
+                item.setAvailable(true); // Set item available
+                return true;
+            }
+        }
+        return false; // Item not found in leased items
+    }
+    
+
 }
 

@@ -23,7 +23,7 @@ public Book(){
 
 // Parameterized Constructor
 
-public Book(String id, String name, String author, int yearOfPublication, int numberOfPages){
+public Book(String name, String author, int yearOfPublication, int numberOfPages){
 
     super(name,author,yearOfPublication);
     this.numberOfPages=numberOfPages;
@@ -37,6 +37,7 @@ public Book(String id, String name, String author, int yearOfPublication, int nu
  public Book(Book otherBook){
     super(otherBook);
     this.numberOfPages=otherBook.numberOfPages;
+    this.id = "B" + (int)(Math.random() * 9000000);
 
 
  }

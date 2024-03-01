@@ -131,7 +131,7 @@ public void setAvailable(boolean isAvailable) {
 public String toString(){
 
 
-    return" ID "+ id+" Name "+name+ "Author" + author + "Year of  Publication "+ yearOfPublication;
+    return" ID "+ id+", Name "+name+ ", Author " + author + ", Year of  Publication "+ yearOfPublication;
 
 }
 
