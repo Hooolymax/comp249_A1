@@ -3,7 +3,7 @@
 // Question 
 // Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
 //--------------------------------------------------------------------
-import java.security.InvalidParameterException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import Item.*;
@@ -39,128 +39,212 @@ public class Driver {
     public static void main(String[] args) {
 
         
-        // menu and welcome message
+        // welcome message
         System.out.println("Welcome to Alisa Ignatina 40267100 and Jinghao Lai 40041316 Library!");
+
         System.out.println("Do you want to get a menu (enter 1) or do you want to run a predefined/hard-coded scenario (enter 2)");
-        String userInput = cin.next();
-        int id; String name, email, phone;
+        int userInput = cin.nextInt();
+        System.out.println();
+
+        int id; int clientID; String itemID; String name, email, phone;
 
         // menu
-        // exception handling if user input is invalid
-        if (userInput.equals("1")){
+        if (userInput == 1){
             do{
                 
                 // display menu
-                System.out.println("menu");
-                userInput = cin.next();
+                System.out.println("Choose an option: ");
+                System.out.println("*******************************************\r\n" + //
+                                        "0 - quit\r\n" + //
+                                        "1 - add an item\r\n" + //
+                                        "2 - delete an item\r\n" + //
+                                        "3 - change information of an item\r\n" + //
+                                        "4 - list all books\r\n" + //
+                                        "5 - list all journals\r\n" + //
+                                        "6 - list all media \r\n" + //
+                                        "7 - print all items (from all categories)\r\n" + //
+                                        "8 - add a client \r\n" + //
+                                        "9 - edit a client\r\n" + //
+                                        "10 - delete a client\r\n" + //
+                                        "11 - lease an item to a client \r\n" + //
+                                        "12 - return an item from a client\r\n" + //
+                                        "13 - show all items leased by a client\r\n" + //
+                                        "14 - show all leased items (by all clients)\r\n" + //
+                                        "15 - Display the biggest book \r\n" + //
+                                        "16 - Make a copy of the books array\r\n" + //
+                                        "*******************************************");
+                System.out.println();
+                userInput = cin.nextInt();
 
                 try{
                 
-                // main menu loop for the interaction with a user
-                switch(userInput){
-                    
-                    case "1":
-
-
-                    case "2":
-
-
-                    case "3":
-
-
-                    case "4":
+                    // main menu loop for the interaction with a user
+                    switch(userInput){
                         
-                        try{     
-                            do{
-                                System.out.println("Enter client name: ");
+                        // max
+                        // add an item
+                        case 1:
+
+                        // max
+                        // delete an item
+                        case 2:
+
+                        // max
+                        // edit an item
+                        case 3:
+
+                        // list all books
+                        case 4:
+                            printBooks();
+                        break;
+
+                        // list all journals
+                        case 5:
+                            printJournals();
+                        break;
+
+                        // list all media
+                        case 6:
+                            printMedias();
+                        break;
+
+                        // list all items
+                        case 7:
+                            printItems();
+                        break;
+
+                        // add a client
+                        case 8:
+                            
+                            try{     
+                                do{
+                                    System.out.println("Enter client name: ");
+                                    name = cin.next();
+                                    System.out.println("Enter client phone: ");
+                                    phone = cin.next();
+                                    System.out.println("Enter client email: ");
+                                    email = cin.next();
+
+                                    addClient(name, phone, email);
+
+                                    System.out.println("The following client was created: " + clients[numClients-1].toString());
+
+                                    System.out.println("Do you want to add another client? ");
+                                } while (cin.next().equals("yes"));
+
+                            // index out of range in clients array
+                            } catch (IndexOutOfBoundsException e){ 
+                                System.out.println("The client was not added, not enough space");
+                            }
+
+                        break;
+
+                        // delete a client
+                        case 9:
+                            try{
+                                System.out.println("Enter client ID you want to delete: ");
+                                id = cin.nextInt(); 
+                                if (deleteClient(id)){
+                                    System.out.println("The client was removed successfully");
+                                } else {
+                                    System.out.println("The client was not found");
+                                }
+
+                            // index out of range in clients array
+                            } catch (IndexOutOfBoundsException e){ 
+                                System.out.println("The client was not added, not enough space");
+                            }
+
+                        break;
+
+                        // edit a client
+                        case 10:
+                            try {
+                                System.out.println("Enter client ID you want to edit: ");
+                                id = cin.nextInt(); 
+                                System.out.println("Enter new name for the client");
                                 name = cin.next();
-                                System.out.println("Enter client phone: ");
+                                System.out.println("Enter new phone for the client");
                                 phone = cin.next();
-                                System.out.println("Enter client email: ");
+                                System.out.println("Enter new email for the client");
                                 email = cin.next();
 
-                                addClient(name, phone, email);
+                                if (editClient(id, name, phone, email)){
+                                    System.out.println("The client was edited successfully: " + clients[numClients].toString());
+                                } else {
+                                    System.out.println("The client was not found");
+                                }
 
-                                System.out.println("The following client was created: " + clients[numClients-1].toString());
-
-                                System.out.println("Do you want to add another client? ");
-                            } while (cin.next().equals("yes"));
-
-                        // index out of range in clients array
-                        } catch (IndexOutOfBoundsException e){ 
-                            System.out.println("The client was not added, not enough space");
-                        }
-
-                        break;
-
-                    case "5":
-                        try{
-                            System.out.println("Enter client ID you want to delete: ");
-                            id = cin.nextInt(); 
-                            if (deleteClient(id)){
-                                System.out.println("The client was removed successfully");
-                            } else {
-                                System.out.println("The client was not found");
+                            // index out of range in clients array
+                            } catch (IndexOutOfBoundsException e){ 
+                                System.out.println("The client was not added, not enough space");
                             }
-
-                        // index out of range in clients array
-                        } catch (IndexOutOfBoundsException e){ 
-                            System.out.println("The client was not added, not enough space");
-                        }
-
                         break;
-
-                    case "6":
-                        try {
-                            System.out.println("Enter client ID you want to edit: ");
-                            id = cin.nextInt(); 
-                            System.out.println("Enter new name for the client");
-                            name = cin.next();
-                            System.out.println("Enter new phone for the client");
-                            phone = cin.next();
-                            System.out.println("Enter new email for the client");
-                            email = cin.next();
-                            if (editClient(id, name, phone, email)){
-                                System.out.println("The client was edited successfully: " + clients[numClients].toString());
-                            } else {
-                                System.out.println("The client was not found");
-                            }
-
-                        // index out of range in clients array
-                        } catch (IndexOutOfBoundsException e){ 
-                            System.out.println("The client was not added, not enough space");
-                        }
-                        break;
-                    
-
-                    case "10":
-                        System.out.println("Enter ID of client to whom you want to lease the item: ");
-                        int clientID = cin.nextInt();
-                        System.out.println("Enter ID of item you want to lease to the client: ");
-                        String itemID = cin.next();
-                        try{
-                            if (leaseItemToClient(itemID, clientID)){
-                                System.out.println("The item was added successfully");
-                            } else {
-                                System.out.println("The item is not available");
-                            }
-                            break;
                         
-                        } catch (IllegalArgumentException e1) {
-                            System.out.println("No client or item found");
-                        } catch (IndexOutOfBoundsException e2) {
-                            System.out.println("Not enough space");
-                        }
+                        // lease an item
+                        case 11:
+
+                            System.out.println("Enter ID of client to whom you want to lease the item: ");
+                            clientID = cin.nextInt();
+                            System.out.println("Enter ID of item you want to lease to the client: ");
+                            itemID = cin.next();
+
+                            try{
+                                if (leaseItemToClient(itemID, clientID)){
+                                    System.out.println("The item was added successfully");
+                                } else {
+                                    System.out.println("The item is not available");
+                                }
+                                break;
+                            
+                            } catch (IllegalArgumentException e1) {
+                                System.out.println("No client or item found");
+                            } catch (IndexOutOfBoundsException e2) {
+                                System.out.println("Not enough space");
+                            }
 
                         break;
 
-                    default:
-                        // input = 0, quit
-                        quit = true;
+                        // max
+                        // return an item from a client
+                        case 12:
+
+                        // show all items leased by a client
+                        case 13:
+                            System.out.println("Enter ID of client whos leased items you want to see: ");
+                            clientID = cin.nextInt();
+                            try{
+                                showItemsLeasedByClient(clientID);
+                            } catch (IllegalArgumentException e){
+                                System.out.println("Illegal ID");
+                            }
+
                         break;
-                }
+                        
+                        //max
+                        // show all leased items (by all clients)
+                        case 14:
+
+                        // Display the biggest book
+                        case 15:
+                            System.out.println(getBiggestBook().toString());
+                        break;
+
+                        // max
+                        // Make a copy of the books array
+                        case 16:
+                        
+                        default:
+                            // input = 0, quit
+                            quit = true;
+                            break;
+                    }
+
+                // exception handling if user input is invalid
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid Input"+ cin.next());
+                } catch (Exception e1) {
+                    System.out.println("Unexpected error occured:( Try to restart the program");
                 }
                 
     
@@ -170,7 +254,7 @@ public class Driver {
 
 
         // predefined/hard-coded scenario
-        if (userInput.equals("2") ){
+        if (userInput ==2 ){
 
             // create 3 obj
             // create 3 users
@@ -374,7 +458,7 @@ public class Driver {
         
     }
 
-    // alisa
+
     public static boolean leaseItemToClient(String itemID, int clientID) throws IllegalArgumentException, IndexOutOfBoundsException {
 
         if (clients[findClientNumByID(clientID)].addLeasedItem(items[findItemNumByID(itemID)])){
@@ -389,9 +473,12 @@ public class Driver {
 
     }
 
-    // alisa
-    public void showItemsLeasedByClient(){
-
+    
+    public static void showItemsLeasedByClient(int clientID) throws IllegalArgumentException{
+        Item[] leasedItems = clients[findClientNumByID(clientID)].getLeasedItems();
+        for (int i = 0; i < numClients; i++){
+            System.out.println(leasedItems[i].toString());
+        }
     }
 
      // max
