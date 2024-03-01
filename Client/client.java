@@ -78,8 +78,8 @@ public class Client {
         this.id = id;
     }
 
-    public boolean addLeasedItem(Item item) {
-        if (numOfLeasedItems < maxNumOfLeasedItems){
+    public boolean addLeasedItem(Item item) throws IndexOutOfBoundsException {
+        if (item.isAvailable()){
             leasedItems[numOfLeasedItems] = item;
             return true;
         } else {

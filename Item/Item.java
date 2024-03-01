@@ -83,7 +83,7 @@ public int getYearOfPublication(){
 
 }
 
-public boolean IsAvailable(){
+public boolean isAvailable(){
     return isAvailable;
 }
 
