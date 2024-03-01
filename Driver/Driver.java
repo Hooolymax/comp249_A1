@@ -11,11 +11,11 @@ public class Driver {
 
     private static Client[] clients = new Client[20];
     private static int numClient = 0;
-    private static Item[] items = new Item[20];
+    private static Item[] items = new Item[30];
     private static int count=0;
-    private static Book[]  books;
-    private Journal[] journals;
-    private Media[] medias;
+    private static Book[]  books = new Book[10];
+    private static Journal[] journals = new Journal[10];
+    private static Media[] medias = new Media[10];
     private static boolean quit = false; //flag to exit the program
     static Scanner cin = new Scanner(System.in);
 
@@ -240,7 +240,9 @@ public class Driver {
 
     // alisa
     public static void printJournals(){
-        
+        for (int i = 0; i < journals.length; i++){
+            System.out.println(journals[i].toString());
+        }
     }
 
     // max
@@ -250,7 +252,9 @@ public class Driver {
 
     // alisa
     public static void printItems(){
-        
+        for (int i = 0; i < items.length; i++){
+            System.out.println(items[i].toString());
+        }
     }
 
 
