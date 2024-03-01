@@ -36,7 +36,7 @@ public class Driver {
     static Scanner cin = new Scanner(System.in);
    
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         
         // welcome message
@@ -53,27 +53,30 @@ public class Driver {
             do{
                 
                 // display menu
-                System.out.println("Choose an option: ");
-                System.out.println("*******************************************\r\n" + //
-                                        "0 - quit\r\n" + //
-                                        "1 - add an item\r\n" + //
-                                        "2 - delete an item\r\n" + //
-                                        "3 - change information of an item\r\n" + //
-                                        "4 - list all books\r\n" + //
-                                        "5 - list all journals\r\n" + //
-                                        "6 - list all media \r\n" + //
-                                        "7 - print all items (from all categories)\r\n" + //
-                                        "8 - add a client \r\n" + //
-                                        "9 - edit a client\r\n" + //
-                                        "10 - delete a client\r\n" + //
-                                        "11 - lease an item to a client \r\n" + //
-                                        "12 - return an item from a client\r\n" + //
-                                        "13 - show all items leased by a client\r\n" + //
-                                        "14 - show all leased items (by all clients)\r\n" + //
-                                        "15 - Display the biggest book \r\n" + //
-                                        "16 - Make a copy of the books array\r\n" + //
-                                        "*******************************************");
                 System.out.println();
+                    System.out.println("Choose an option: ");
+                    System.out.println("*******************************************\r\n" + //
+                                            "0 - quit\r\n" + //
+                                            "1 - add an item\r\n" + //
+                                            "2 - delete an item\r\n" + //
+                                            "3 - change information of an item\r\n" + //
+                                            "4 - list all books\r\n" + //
+                                            "5 - list all journals\r\n" + //
+                                            "6 - list all media \r\n" + //
+                                            "7 - print all items (from all categories)\r\n" + //
+                                            "8 - add a client \r\n" + //
+                                            "9 - delete a client\r\n" + //
+                                            "10 - edit a client\r\n" + //
+                                            "11 - lease an item to a client \r\n" + //
+                                            "12 - return an item from a client\r\n" + //
+                                            "13 - show all items leased by a client\r\n" + //
+                                            "14 - show all leased items (by all clients)\r\n" + //
+                                            "15 - Display the biggest book \r\n" + //
+                                            "16 - Make a copy of the books array\r\n" + //
+                                            "17 - print all clients\r\n" + //
+                                            "*******************************************");
+                    System.out.println();
+                
                 userInput = cin.nextInt();
 
                 try{
@@ -242,7 +245,7 @@ public class Driver {
                                     System.out.println("The following client was created: " + clients[numClients-1].toString());
 
                                     System.out.println("Do you want to add another client? ");
-                                } while (cin.nextLine().trim().toLowerCase().equals("yes"));
+                                } while (cin.next().trim().toLowerCase().equals("yes"));
 
                             // index out of range in clients array
                             } catch (IndexOutOfBoundsException e){ 
@@ -282,7 +285,7 @@ public class Driver {
                                 email = cin.next();
 
                                 if (editClient(id, name, phone, email)){
-                                    System.out.println("The client was edited successfully: " + clients[numClients].toString());
+                                    System.out.println("The client was edited successfully: " + clients[findClientNumByID(id)].toString());
                                 } else {
                                     System.out.println("The client was not found");
                                 }
@@ -290,6 +293,8 @@ public class Driver {
                             // index out of range in clients array
                             } catch (IndexOutOfBoundsException e){ 
                                 System.out.println("The client was not added, not enough space");
+                            } catch (IllegalArgumentException e1){
+                                System.out.println("Please enter correct information");
                             }
                         break;
                         
@@ -348,10 +353,6 @@ public class Driver {
                         break;
                         
 
-
-
-
-
                         // Display the biggest book
                         case 15:
                             System.out.println(getBiggestBook(books).toString());
@@ -360,8 +361,15 @@ public class Driver {
                         
                         // Make a copy of the books array
                         case 16:
-                            
+                            Book[] newBooks = copyBooks(books);
+                            for (int i =0; i < newBooks.length; i++){
+                                System.out.println(newBooks[i].toString());
+                            }
 
+                        break;
+
+                        case 17:
+                            printClients();
                         break;
                         
                         default:
@@ -372,12 +380,15 @@ public class Driver {
 
                 // exception handling if user input is invalid
                 } catch (InputMismatchException e) {
-                    System.out.println("Invalid Input"+ cin.nextLine()); // clear scanner
-                } catch (Exception e1) {
-                    System.out.println("Unexpected error occured:( Try to restart the program");
-                }
+                    System.out.println("Invalid Input \""+ cin.nextLine() +"\""); // clear scanner
+                    System.out.println("Please enter valid information");
+                } 
                 
-    
+                
+                
+                Thread.sleep(2000);
+                
+
             } while (!quit); // condition to exit
             
         }
@@ -751,6 +762,12 @@ public class Driver {
         
     }
 
+    public static void printClients(){
+        for (int i = 0; i< numClients; i++){
+            System.out.println(clients[i].toString());
+        }
+    }
+
 
     public static boolean leaseItemToClient(String itemID, int clientID) throws IllegalArgumentException, IndexOutOfBoundsException {
 
@@ -802,7 +819,7 @@ public class Driver {
         }
     }
 
-     // max
+     
     public static void showAllItemsLeased(){
 
         boolean foundLeasedItems = false;
@@ -852,6 +869,8 @@ public class Driver {
 
     //copy book
     public Book[] copyBooks(Book[] originalBooks) {
+    
+    public static Book[] copyBooks(Book[] originalBooks) {
         if (originalBooks == null) {
             return null; 
         }
