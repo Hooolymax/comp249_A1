@@ -7,8 +7,8 @@ package Item;
 
 public class Media extends Item{
     
-    protected String type;
-    protected int count = 0;
+    private String type;
+    private static int count = 0;
 
     public Media(){
         super();

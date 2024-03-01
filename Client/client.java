@@ -14,7 +14,8 @@ import Item.*;
 public class Client {
 
     // variable declaration
-    private int id = 0;
+    private static int count = 0;
+    private int id;
     private String name;
     private String phone;
     private String email;
@@ -27,7 +28,7 @@ public class Client {
         this.name = "n/a";
         this.phone = "n/a";
         this.email = "n/a";
-        this.id ++;
+        this.id = ++count;
         this.leasedItems = new Item[maxNumOfLeasedItems];
     }
 
@@ -36,7 +37,7 @@ public class Client {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.id ++;
+        this.id = ++count;
         this.leasedItems = new Item[maxNumOfLeasedItems];
     }
 

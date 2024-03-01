@@ -81,7 +81,7 @@ public class Driver {
                     // main menu loop for the interaction with a user
                     switch(userInput){
                         
-                        // max
+                        
                         // add an item
                         case 1:
                         {
@@ -153,11 +153,10 @@ public class Driver {
 
 
 
-                        // max
                         // delete an item
                         case 2:
 
-                        // max
+
                         // edit an item
                         case 3:
 
@@ -198,7 +197,7 @@ public class Driver {
                                     System.out.println("The following client was created: " + clients[numClients-1].toString());
 
                                     System.out.println("Do you want to add another client? ");
-                                } while (cin.next().equals("yes"));
+                                } while (cin.nextLine().trim().toLowerCase().equals("yes"));
 
                             // index out of range in clients array
                             } catch (IndexOutOfBoundsException e){ 
@@ -273,7 +272,7 @@ public class Driver {
 
                         break;
 
-                        // max
+                
                         // return an item from a client
                         case 12:
 
@@ -289,10 +288,10 @@ public class Driver {
 
                         break;
                         
-                        //max
+                    
                         // show all leased items (by all clients)
                         case 14:
-                        showAllItemsLeased();
+                            showAllItemsLeased();
                         break;
                         
 
@@ -317,7 +316,7 @@ public class Driver {
 
                 // exception handling if user input is invalid
                 } catch (InputMismatchException e) {
-                    System.out.println("Invalid Input"+ cin.next());
+                    System.out.println("Invalid Input"+ cin.nextLine()); // clear scanner
                 } catch (Exception e1) {
                     System.out.println("Unexpected error occured:( Try to restart the program");
                 }
@@ -331,8 +330,6 @@ public class Driver {
         // predefined/hard-coded scenario
         if (userInput ==2 ){
 
-            // create 3 obj
-            // create 3 users
 
             // Create at least 3 objects from each type of items
             Book book1 = new Book("The Lord of the Rings", "J.R.R Tolkien", 1954, 300);
@@ -361,8 +358,8 @@ public class Driver {
             System.out.println(media2);
             System.out.println(media3);
 
-            // Test the equality from same class
 
+            // Test the equality from same class
 
             System.out.println("");
             System.out.println("Test the equality");
@@ -398,9 +395,9 @@ public class Driver {
             // Display their information
             System.out.println("");
             System.out.println("Display the clients information");
-            System.out.println(client1);
-            System.out.println(client2);
-            System.out.println(client3);
+            System.out.println(client1.toString());
+            System.out.println(client2.toString());
+            System.out.println(client3.toString());
 
 
         }
@@ -548,7 +545,7 @@ public class Driver {
     }
 
 
-    // max
+    
     public static void printBooks(){
         for (int i = 0; i < numBooks; i++){
             System.out.println(books[i].toString());
@@ -562,7 +559,7 @@ public class Driver {
         }
     }
 
-    // max
+    
     public static void printMedias(){
         for (int i = 0; i < numMedias; i++){
             System.out.println(medias[i].toString());
@@ -633,7 +630,7 @@ public class Driver {
         }
     }
 
-     // max
+     
     public void returnItemFromClient(String itemID, int clientID) throws IllegalArgumentException, IndexOutOfBoundsException{
         try {
             int clientIndex = findClientNumByID(clientID);

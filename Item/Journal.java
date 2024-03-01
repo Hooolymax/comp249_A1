@@ -9,13 +9,12 @@ package Item;
 public class Journal extends Item{
     
     private int volNum;
-    private int count = 0;
+    private static int count = 0;
 
     public Journal(){
         super();
         this.volNum = 0;
-        count++;
-        this.id = "J" + ("0".repeat(7-Integer.toString(count).length())) + count;
+        this.id = "J" + ("0".repeat(7-Integer.toString(count).length())) + ++count;
     }
 
     public Journal(String name, String author, int yearOfPublication, int volNum){
