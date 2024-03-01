@@ -9,7 +9,7 @@ import Client.*;;
 
 public class Driver {
 
-    private static Client[] clients = new Client[1];
+    private static Client[] clients = new Client[20];
     private static int numClient = 0;
     private static Item[] items = new Item[20];
     private static int count=0;
@@ -39,20 +39,48 @@ public class Driver {
                     // cases
 
                     case 4:
-                        try{
-                            
+                        
+                        try{     
                             do{
-                                addClient();
+                                System.out.println("Enter client name: ");
+                                String name = cin.next();
+                                System.out.println("Enter client phone: ");
+                                String phone = cin.next();
+                                System.out.println("Enter client email: ");
+                                String email = cin.next();
+
+                                addClient(name, phone, email);
+
+                                System.out.println("The following client was created: " + clients[numClient].toString());
+
                                 System.out.println("Do you want to add another client? ");
                             } while (cin.next().equals("yes"));
 
-                        } catch (Exception IndexOutOfBoundsException){
+                        // index out of range in clients array
+                        } catch (Exception IndexOutOfBoundsException){ 
                             System.out.println("The client was not added, not enough space");
                         }
 
                         break;
 
+                    case 5:
 
+                        System.out.println("Enter client ID you want to delete: ");
+                        int id = cin.nextInt(); 
+                        if (deleteClient(id)){
+                            System.out.println("The client was removed successfully");
+                        } else {
+                            System.out.println("The client was not found");
+                        }
+
+
+                        break;
+
+                    case 6:
+
+                    
+                        break;
+                    
                     default:
                         // input = 0, quit
                         quit = true;
@@ -184,46 +212,61 @@ public class Driver {
     
 
 
-    public static void addClient() throws Exception { // index out of range in clients array
-        System.out.println("Enter client name: ");
-        String name = cin.next();
-        System.out.println("Enter client phone: ");
-        String phone = cin.next();
-        System.out.println("Enter client email: ");
-        String email = cin.next();
-        clients[numClient] = new Client(name, phone, email); // new client is added to clients array 
-        System.out.println("The following client was created: " + clients[numClient].toString());
-        numClient++;
+    public static void addClient(String name, String phone, String email) throws Exception { 
+
+            clients[numClient] = new Client(name, phone, email); // new client is added to clients array 
+    
+            numClient++;
+
     }
 
-    public void deleteClient(){
-        
+    // alisa
+    public static boolean deleteClient(int id){
+
+        for (int i=0; i<clients.length; i++){
+            if (clients[i].getId() == id){
+                for (int j = i; j < numClient - 1; j++) {
+                    clients[j] = clients[j + 1];
+                }
+                clients[numClient-1] = null;
+                numClient--;
+                return true;
+            }
+        }
+        return false;
     }
 
+    // alisa
     public void editClient(){
         
     }
 
+    // alisa
     public void leaseItem(){
 
     }
 
+     // max
     public void returnItem(){
 
     }
 
+    // alisa
     public void showItems(){
 
     }
 
+     // max
     public void showAllItems(){
 
     }
 
+    // alisa
     public void getBiggestBook(){
         
     }
-
+ 
+    //max
     public void copyBooks(){
 
     }
