@@ -454,12 +454,7 @@ public class Driver {
             Client client2 = new Client("C2", "514-765-4321", "client2@gmail.com");
             Client client3 = new Client("C3", "514-123-7890", "client3@gmail.com");
 
-            clients[0] =client1;
-            items[0] = media1;
-            numClients++; numItems++;
-            leaseItemToClient("M0000001", clients[0].getId());
             
-            deleteClient(1);
 
             // Display their information
             System.out.println("");
