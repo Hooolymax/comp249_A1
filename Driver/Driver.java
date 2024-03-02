@@ -11,24 +11,24 @@ import Client.*;;
 
 public class Driver {
 
-    private final static int maxnumClients = 30;
-    private static Client[] clients = new Client[maxnumClients];
+    private final static int MAXNUMCLIENTS = 30;
+    private static Client[] clients = new Client[MAXNUMCLIENTS];
     private static int numClients = 0;
 
-    private final static int maxnumItems = 30;
-    private static Item[] items = new Item[maxnumItems];
+    private final static int MAXNUMITEMS = 30;
+    private static Item[] items = new Item[MAXNUMITEMS];
     private static int numItems=0;
 
-    private final static int maxnumBooks = 10;
-    private static Book[]  books = new Book[maxnumBooks];
+    private final static int MAXNUMBOOKS = 10;
+    private static Book[]  books = new Book[MAXNUMBOOKS];
     private static int numBooks=0;
 
-    private final static int maxnumJournals = 10;
-    private static Journal[] journals = new Journal[maxnumJournals];
+    private final static int MAXNUMJOURNALS = 10;
+    private static Journal[] journals = new Journal[MAXNUMJOURNALS];
     private static int numJournals=0;
 
-    private final static int maxnumMedias = 10;
-    private static Media[] medias = new Media[maxnumMedias];
+    private final static int MAXNUMMEDIAS = 10;
+    private static Media[] medias = new Media[MAXNUMMEDIAS];
     private static int numMedias=0;
 
     private static boolean quit = false; //flag to exit the program
@@ -545,21 +545,21 @@ public class Driver {
         
     // Add item based on its specific type
     if (newItem instanceof Book) {
-        if (numBooks >= maxnumBooks) {
+        if (numBooks >= MAXNUMBOOKS) {
             System.out.println("Cannot add new book, Book inventory is full.");
             return;
         }
         books[numBooks] = (Book) newItem;
         numBooks++;
     } else if (newItem instanceof Journal) {
-        if (numJournals >= maxnumJournals) {
+        if (numJournals >= MAXNUMJOURNALS) {
             System.out.println("Cannot add new journal, Journal inventory is full.");
             return;
         }
         journals[numJournals] = (Journal) newItem;
         numJournals++;
     } else if (newItem instanceof Media) {
-        if (numMedias >= maxnumMedias) {
+        if (numMedias >= MAXNUMMEDIAS) {
             System.out.println("Cannot add new media, Media inventory is full.");
             return;
         }
@@ -834,7 +834,11 @@ public class Driver {
     
     public static void showItemsLeasedByClient(int clientID) throws IllegalArgumentException{
         Item[] leasedItems = clients[findClientNumByID(clientID)].getLeasedItems();
-        for (int i = 0; i < numClients; i++){
+        if (clients[findClientNumByID(clientID)].getNumOfLeasedItems() == 0){
+            System.out.println("no leased items");
+            return;
+        }
+        for (int i = 0; i < clients[findClientNumByID(clientID)].getNumOfLeasedItems(); i++){
             System.out.println(leasedItems[i].toString());
         }
     }
@@ -851,7 +855,7 @@ public class Driver {
             Item[] leasedItems = client.getLeasedItems(); // Get the leased items for the current client
     
             // Check each item to see if it's leased
-            for (int j = 0; j < client.maxNumOfLeasedItems; j++) {
+            for (int j = 0; j < client.MAXNUMOFLEASEDITEMS; j++) {
                 Item item = leasedItems[j];
                 if (item != null) { // If there's an item in this slot
                     foundLeasedItems = true; // We have found at least one leased item
