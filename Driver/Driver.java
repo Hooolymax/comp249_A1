@@ -455,7 +455,18 @@ public class Driver {
             Book[] booksArray = {book1, book2, book3};
             Journal[] journalsArray = {journal1, journal2, journal3};
             Media[] mediasArray = {media1, media2, media3};
-            Item[] allItemsArray = {book1, book2, book3, journal1, journal2, journal3, media1, media2, media3};
+            
+            Item[] allItemsArray = new Item[20];
+            
+            allItemsArray[0] = book1;
+            allItemsArray[1] = book2;
+            allItemsArray[2] = book3;
+            allItemsArray[3] = journal1;
+            allItemsArray[4] = journal2;
+            allItemsArray[5] = journal3;
+            allItemsArray[6] = media1;
+            allItemsArray[7] = media2;
+            allItemsArray[8] = media3;
 
             // Create 3 Client1
             Client client1 = new Client("C1", "514-456-7890", "client1@gmail.com");
