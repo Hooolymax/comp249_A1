@@ -454,8 +454,12 @@ public class Driver {
             Client client2 = new Client("C2", "514-765-4321", "client2@gmail.com");
             Client client3 = new Client("C3", "514-123-7890", "client3@gmail.com");
 
-
-
+            clients[0] =client1;
+            items[0] = media1;
+            numClients++; numItems++;
+            leaseItemToClient("M0000001", clients[0].getId());
+            
+            deleteClient(1);
 
             // Display their information
             System.out.println("");
@@ -528,7 +532,7 @@ public class Driver {
     }
 
     public static int findClientNumByID(int id) throws IllegalArgumentException{
-        for (int i = 0; i< numClients; i++){
+        for (int i = 0; i < numClients; i++){
             if (clients[i].getId() == (id)){
                 return i;
             }
@@ -747,15 +751,20 @@ public class Driver {
    
     public static boolean deleteClient(int id) throws IllegalArgumentException{
 
-        int i = findClientNumByID(id);
+        int clientIndex = findClientNumByID(id);
 
         // if client was not found
-        if (i == -1){
+        if (clientIndex == -1){
             return false;
         }
 
+        // return all items leased by this client
+        for (int j = 0; j < clients[clientIndex].getNumOfLeasedItems(); j++){
+            returnItemFromClient(clients[clientIndex].getLeasedItems()[j].getId(), id);
+        }
+
         // shift items after to the one position to the left
-        for (int j = i; j < numClients - 1; j++) {
+        for (int j = clientIndex; j < numClients - 1; j++) {
             clients[j] = clients[j + 1];
         }
         clients[numClients-1] = null;
@@ -791,6 +800,7 @@ public class Driver {
 
     public static boolean leaseItemToClient(String itemID, int clientID) throws IllegalArgumentException, IndexOutOfBoundsException {
 
+        // attempts to add item to the client
         if (clients[findClientNumByID(clientID)].addLeasedItem(items[findItemNumByID(itemID)])){
             return true;
         } else{
