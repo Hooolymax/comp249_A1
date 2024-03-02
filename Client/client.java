@@ -1,12 +1,12 @@
+//--------------------------------------------------------------------  
+// Assignment 1
+// Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
+//--------------------------------------------------------------------
+
 package Client;
 
 import Item.*;
 
-//--------------------------------------------------------------------  
-// Assignment 1
-// Question 
-// Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
-//--------------------------------------------------------------------
 
 
 /** This class stores information about clients

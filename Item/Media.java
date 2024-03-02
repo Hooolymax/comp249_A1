@@ -1,9 +1,9 @@
-package Item;
 //--------------------------------------------------------------------  
 // Assignment 1
-// Question 
 // Written by Alisa Ignatina 40267100 and Jinghao Lai 40041316 
 //--------------------------------------------------------------------
+
+package Item;
 
 public class Media extends Item{
     
