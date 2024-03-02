@@ -20,7 +20,7 @@ public class Client {
     private String phone;
     private String email;
     private Item[] leasedItems;
-    public final int maxNumOfLeasedItems = 10;
+    public final int MAXNUMOFLEASEDITEMS = 10;
     private int numOfLeasedItems = 0;
     
     // default constructor
@@ -29,7 +29,7 @@ public class Client {
         this.phone = "n/a";
         this.email = "n/a";
         this.id = ++count;
-        this.leasedItems = new Item[maxNumOfLeasedItems];
+        this.leasedItems = new Item[MAXNUMOFLEASEDITEMS];
     }
 
     // parameterized constructor
@@ -38,7 +38,7 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.id = ++count;
-        this.leasedItems = new Item[maxNumOfLeasedItems];
+        this.leasedItems = new Item[MAXNUMOFLEASEDITEMS];
     }
 
     // getters 
@@ -62,6 +62,10 @@ public class Client {
         return leasedItems;
     }
 
+    public int getNumOfLeasedItems(){
+        return numOfLeasedItems;
+    }
+
     // setters
     public void setName(String name) {
         this.name = name;
@@ -81,7 +85,7 @@ public class Client {
 
     public boolean addLeasedItem(Item item) throws IndexOutOfBoundsException {
         if (item.isAvailable()){
-            leasedItems[numOfLeasedItems] = item;
+            leasedItems[numOfLeasedItems++] = item;
             item.setAvailable(false);
             return true;
         } else {
